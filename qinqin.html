@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>沁沁</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f8e1e1; /* 设置为粉色 */
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      overflow: hidden;
+    }
+    .container {
+      background-color: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 600px;
+      position: relative;
+      z-index: 2;
+    }
+    h1 {
+      font-size: 36px;
+      color: #e91e63;
+      margin-bottom: 20px;
+    }
+    /* 图片容器 */
+    .image-container {
+      margin: 20px 0;
+    }
+    .image-container img {
+      width: 200px; /* 调整为图片的实际大小 */
+      height: 200px;
+      object-fit: cover;
+    }
+    p {
+      font-size: 18px;
+      color: #333;
+      line-height: 1.6;
+    }
+    .buttons {
+      margin-top: 30px;
+    }
+    button {
+      background-color: #e91e63;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+    button:hover {
+      background-color: #c2185b;
+      transform: scale(1.1); /* 鼠标悬停时稍微放大 */
+    }
+    button:active {
+      background-color: #ad1457;
+      transform: scale(1); /* 按下时恢复大小 */
+    }
+    .countdown {
+      font-size: 24px;
+      color: #e91e63;
+      margin-top: 20px;
+    }
+    /* 加载状态的样式 */
+    .loading {
+      background-color: #b2ebf2;
+      color: #333;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>My Bae</h1>
+
+  <div class="image-container">
+    <img src="\images\heart.png" alt="爱心小猫">
+  </div>
+
+  <p>花会沿途盛开，我们的未来也是。</p>
+
+  <div class="image-container">
+    <img src="\images\flower.png" alt="花花">
+  </div>
+
+  <div class="countdown" id="countdown"></div>
+
+  <p>想我了吗？</p>
+
+  <div class="buttons">
+    <button id="loveButton" onclick="handleClick()">想你</button>
+  </div>
+</div>
+
+<script>
+  // 倒计时功能
+  function updateCountdown() {
+    var targetDate = new Date("2025-02-22T00:00:00");
+    var now = new Date();
+    var timeDiff = targetDate - now;
+
+    if (timeDiff <= 0) {
+      document.getElementById("countdown").innerText = "重要时刻到了！";
+      clearInterval(countdownInterval);
+    } else {
+      var days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+      document.getElementById("countdown").innerText = `倒计时：${days}天 ${hours}小时 ${minutes}分钟`;
+    }
+  }
+
+  var countdownInterval = setInterval(updateCountdown, 1000);
+
+  // 点击按钮的处理函数
+  function handleClick() {
+    var button = document.getElementById('loveButton');
+
+    // 变更按钮为加载状态
+    button.classList.add('loading');
+    button.innerText = '正在发送...';
+
+    // 模拟发送后显示信息
+    setTimeout(function() {
+      alert('我也想你，宝宝！');
+      button.classList.remove('loading');
+      button.innerText = '想你'; // 恢复按钮文本
+    }, 2000); // 模拟2秒后回复
+  }
+</script>
+
+</body>
+</html>
